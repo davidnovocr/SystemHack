@@ -1,4 +1,4 @@
-site_name: SystemHack
+site_name: SystemHack IA
 theme:
   name: material
 
@@ -10,3 +10,4 @@ nav:
   - Herramientas:
       - CRM y más: crm.md
   - Presentacion SystemHacks: presentacion.md
+
