@@ -9,7 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
           persist-credentials: false  # importante para usar token
 
@@ -26,4 +27,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdocs gh-deploy --force --remote-name origin --message "Deploy via GitHub Actions"
+          mkdocs gh-deploy --force --remote-name origin --message "Deploy via GitHub Actions" --config-file mkdocs.yml
