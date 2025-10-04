@@ -3,13 +3,15 @@ name: Deploy MkDocs
 on:
   push:
     branches:
-      - main  # o la rama donde subiste los archivos
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # importante para usar token
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -18,8 +20,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mkdocs mkdocs-material
+          pip install mkdocs mkdocs-material ghp-import
 
       - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdocs gh-deploy --force
+          mkdocs gh-deploy --force --remote-name origin --message "Deploy via GitHub Actions"
